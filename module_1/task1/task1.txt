@@ -1,0 +1,7 @@
+Semantic HTML matters for three main reasons:
+
+Accessibility – Elements like <nav>, <main>, <header>, and <button> give screen readers meaningful structure and make websites easier to navigate for people with disabilities.
+SEO – Search engines can better understand the purpose and structure of your content, which can help them index and rank pages appropriately.
+Maintainability & clarity – Semantic elements make code easier for developers to read, understand, and maintain compared with using generic <div> elements everywhere.
+
+In short: semantic HTML improves accessibility, SEO, and code quality.

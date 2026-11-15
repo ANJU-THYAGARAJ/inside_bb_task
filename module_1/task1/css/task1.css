@@ -1,0 +1,86 @@
+/* Basic page styling */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+.skip-link {
+    position: absolute;
+    left: 10px;
+    top: -50px;
+    padding: 10px;
+    background: #000;
+    color: #fff;
+    z-index: 1000;
+}
+
+.skip-link:focus {
+    top: 10px;
+}
+
+header,
+footer {
+    padding: 20px 0;
+}
+
+nav {
+    margin: 20px 0;
+}
+
+nav a {
+    margin-right: 15px;
+}
+
+main {
+    max-width: 1000px;
+}
+
+figure {
+    margin: 30px 0;
+}
+
+figure img {
+    display: block;
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+}
+
+figcaption {
+    margin-top: 8px;
+    font-style: italic;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th,
+td {
+    border: 1px solid #555;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    font-weight: bold;
+}
+
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 3px solid #005fcc;
+    outline-offset: 3px;
+}
