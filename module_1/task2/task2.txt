@@ -1,0 +1,11 @@
+A candidate tells me their form is secure because it validates on the client. I would explain that client-side validation is useful, but it does not make a form secure. Client-side validation mainly improves user experience by providing immediate feedback and preventing accidental mistakes. However, the browser and JavaScript code are completely under the user's control.
+
+An attacker can disable JavaScript, remove `required` attributes, change `maxlength` values, modify input types, or bypass the browser entirely by sending requests through tools such as curl or Postman. Therefore, any validation performed only in HTML or JavaScript can be bypassed.
+
+The server must be treated as the security boundary. Every field must be independently validated on the server, even when the same rules already exist on the client. For example, if the client requires an age between 18 and 100, the server must check those limits again. The same applies to email format, password length, phone numbers, allowed choices, uploaded files, and required fields.
+
+I would also test the form rather than simply trusting the implementation. I would disable JavaScript, modify HTML validation attributes, tamper with hidden fields, and send invalid POST requests directly to the server. The server should reject all invalid or manipulated requests.
+
+Finally, validation is only one part of security. The application should also use CSRF protection, safely handle uploaded files, securely process hidden values, and escape untrusted data when displaying it to prevent XSS.
+
+So my answer would be: client-side validation is a usability feature, not a security boundary. A secure form must always enforce its validation rules server-side.

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Secure Registration</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        fieldset {
+            margin-bottom: 25px;
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input,
+        button {
+            padding: 10px;
+            margin-top: 5px;
+        }
+
+        input:not([type="radio"]):not([type="checkbox"]) {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .error {
+            color: #b00020;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        [aria-invalid="true"] {
+            border: 2px solid #b00020;
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Secure Registration</h1>
+
+<form
+    method="post"
+    enctype="multipart/form-data"
+    novalidate
+>
+
+    {% csrf_token %}
+
+    
+    <input
+        type="hidden"
+        name="form_token"
+        value="{{ form_token }}"
+    >
+
+    {% if form_error %}
+    <p
+        id="form-error"
+        class="error"
+        role="alert"
+        tabindex="-1"
+    >
+        {{ form_error }}
+    </p>
+{% endif %}
+    <section
+        class="step active"
+        id="step1"
+        aria-labelledby="step1-heading"
+    >
+
+        <h2 id="step1-heading">Personal Information</h2>
+
+        <!-- Name -->
+
+        <label for="name">
+            Full name
+        </label>
+
+        <input
+            id="name"
+            name="name"
+            type="text"
+            required
+            minlength="2"
+            maxlength="50"
+            pattern="[A-Za-z ]+"
+            title="Enter 2-50 letters and spaces only."
+            autocomplete="name"
+            value="{{ old.name|default:'' }}"
+            aria-describedby="name-error"
+            {% if errors.name %}aria-invalid="true"{% endif %}
+        >
+
+        {% if errors.name %}
+            <p
+                id="name-error"
+                class="error"
+                role="alert"
+            >
+                {{ errors.name }}
+            </p>
+        {% endif %}
+
+
+        <!-- Email -->
+
+        <label for="email">
+            Email address
+        </label>
+
+        <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            maxlength="254"
+            autocomplete="email"
+            value="{{ old.email|default:'' }}"
+            aria-describedby="email-error"
+            {% if errors.email %}aria-invalid="true"{% endif %}
+        >
+
+        {% if errors.email %}
+            <p
+                id="email-error"
+                class="error"
+                role="alert"
+            >
+                {{ errors.email }}
+            </p>
+        {% endif %}
+
+
+        <!-- Password -->
+
+        <label for="password">
+            Password
+        </label>
+
+        <input
+            id="password"
+            name="password"
+            type="password"
+            required
+            minlength="8"
+            maxlength="64"
+            autocomplete="new-password"
+            aria-describedby="password-error"
+            {% if errors.password %}aria-invalid="true"{% endif %}
+        >
+
+        {% if errors.password %}
+            <p
+                id="password-error"
+                class="error"
+                role="alert"
+            >
+                {{ errors.password }}
+            </p>
+        {% endif %}
+
+
+        <!-- Age -->
+
+        <label for="age">
+            Age
+        </label>
+
+        <input
+            id="age"
+            name="age"
+            type="number"
+            required
+            min="18"
+            max="100"
+            aria-describedby="age-error"
+            {% if errors.age %}aria-invalid="true"{% endif %}
+        >
+
+        {% if errors.age %}
+            <p
+                id="age-error"
+                class="error"
+                role="alert"
+            >
+                {{ errors.age }}
+            </p>
+        {% endif %}
+
+
+        <!-- Phone -->
+
+        <label for="phone">
+            Phone number
+        </label>
+
+      
+        <input
+            id="phone"
+            name="phone"
+            type="tel"
+            required
+            minlength="10"
+            maxlength="16"
+            pattern="\+?[0-9]{10,15}"
+            title="Enter 10-15 digits, optionally beginning with +."
+            autocomplete="tel"
+            aria-describedby="phone-error"
+            {% if errors.phone %}aria-invalid="true"{% endif %}
+        >
+
+        {% if errors.phone %}
+            <p
+                id="phone-error"
+                class="error"
+                role="alert"
+            >
+                {{ errors.phone }}
+            </p>
+        {% endif %}
+
+
+        <div class="buttons">
+            <button type="button" id="next1">
+                Next
+            </button>
+        </div>
+
+    </section>
+
+
+    <section
+        class="step"
+        id="step2"
+        aria-labelledby="step2-heading"
+    >
+
+        <h2 id="step2-heading">
+            Preferences
+        </h2>
+
+
+        <fieldset>
+
+            <legend>
+                Gender
+            </legend>
+
+            <label>
+                <input
+                    type="radio"
+                    name="gender"
+                    value="male"
+                    required
+                >
+                Male
+            </label>
+
+            <label>
+                <input
+                    type="radio"
+                    name="gender"
+                    value="female"
+                >
+                Female
+            </label>
+
+            <label>
+                <input
+                    type="radio"
+                    name="gender"
+                    value="other"
+                >
+                Other
+            </label>
+
+            {% if errors.gender %}
+                <p
+                    class="error"
+                    id="gender-error"
+                    role="alert"
+                >
+                    {{ errors.gender }}
+                </p>
+            {% endif %}
+
+        </fieldset>
+
+
+        <fieldset>
+
+            <legend>
+                Interests
+            </legend>
+
+            <label>
+                <input
+                    type="checkbox"
+                    name="interests"
+                    value="python"
+                >
+                Python
+            </label>
+
+            <label>
+                <input
+                    type="checkbox"
+                    name="interests"
+                    value="django"
+                >
+                Django
+            </label>
+
+            <label>
+                <input
+                    type="checkbox"
+                    name="interests"
+                    value="ai"
+                >
+                Artificial Intelligence
+            </label>
+
+            <label>
+                <input
+                    type="checkbox"
+                    name="interests"
+                    value="web"
+                >
+                Web Development
+            </label>
+
+            {% if errors.interests %}
+                <p
+                    class="error"
+                    id="interests-error"
+                    role="alert"
+                >
+                    {{ errors.interests }}
+                </p>
+            {% endif %}
+
+        </fieldset>
+
+
+        <!-- Terms -->
+
+        <label for="terms">
+            <input
+                id="terms"
+                name="terms"
+                type="checkbox"
+                value="yes"
+                required
+                aria-describedby="terms-error"
+                {% if errors.terms %}aria-invalid="true"{% endif %}
+            >
+
+            I agree to the terms and conditions.
+        </label>
+
+        {% if errors.terms %}
+            <p
+                id="terms-error"
+                class="error"
+                role="alert"
+            >
+                {{ errors.terms }}
+            </p>
+        {% endif %}
+
+
+        <div class="buttons">
+
+            <button
+                type="button"
+                id="back2"
+            >
+                Back
+            </button>
+
+            <button
+                type="button"
+                id="next2"
+            >
+                Next
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <section
+        class="step"
+        id="step3"
+        aria-labelledby="step3-heading"
+    >
+
+        <h2 id="step3-heading">
+            Upload Document
+        </h2>
+
+        <label for="document">
+            Upload document
+        </label>
+
+        <input
+            id="document"
+            name="document"
+            type="file"
+            required
+            accept=".pdf,.jpg,.jpeg,.png"
+            aria-describedby="document-help document-error"
+            {% if errors.document %}aria-invalid="true"{% endif %}
+        >
+
+        <p id="document-help">
+            PDF, JPG, JPEG or PNG only. Maximum file size: 2 MB.
+        </p>
+
+        {% if errors.document %}
+            <p
+                id="document-error"
+                class="error"
+                role="alert"
+            >
+                {{ errors.document }}
+            </p>
+        {% endif %}
+
+
+        <div class="buttons">
+
+            <button
+                type="button"
+                id="back3"
+            >
+                Back
+            </button>
+
+            <button type="submit">
+                Register
+            </button>
+
+        </div>
+
+    </section>
+
+</form>
+
+
+<script>
+"use strict";
+
+
+
+const steps = document.querySelectorAll(".step");
+
+function showStep(number) {
+
+    steps.forEach((step, index) => {
+        step.classList.toggle(
+            "active",
+            index === number - 1
+        );
+    });
+
+    const heading = document.querySelector(
+        `#step${number}-heading`
+    );
+
+    if (heading) {
+        heading.focus();
+    }
+}
+
+document.getElementById("next1").addEventListener(
+    "click",
+    function () {
+
+        const step = document.getElementById("step1");
+
+        const inputs = step.querySelectorAll(
+            "input"
+        );
+
+        for (const input of inputs) {
+
+            if (!input.checkValidity()) {
+                input.focus();
+                return;
+            }
+        }
+
+        showStep(2);
+    }
+);
+
+document.getElementById("back2").addEventListener(
+    "click",
+    function () {
+        showStep(1);
+    }
+);
+
+
+document.getElementById("next2").addEventListener(
+    "click",
+    function () {
+
+        const form = document.querySelector("form");
+
+        const step2Inputs = document.querySelectorAll(
+            "#step2 input"
+        );
+
+        for (const input of step2Inputs) {
+
+            if (!input.checkValidity()) {
+                input.focus();
+                return;
+            }
+        }
+
+        showStep(3);
+    }
+);
+
+
+document.getElementById("back3").addEventListener(
+    "click",
+    function () {
+        showStep(2);
+    }
+);
+
+
+
+
+document.querySelector("form").addEventListener(
+    "invalid",
+    function (event) {
+
+        event.target.setAttribute(
+            "aria-invalid",
+            "true"
+        );
+
+        if (!window.invalidFocused) {
+            window.invalidFocused = true;
+            event.target.focus();
+        }
+
+    },
+    true
+);
+
+
+document.querySelector("form").addEventListener(
+    "submit",
+    function () {
+        window.invalidFocused = false;
+    }
+);
+</script>
+
+</body>
+</html>
