@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Analytics Dashboard</title>
+
+    <meta
+        name="description"
+        content="Responsive analytics dashboard built with CSS Grid and Flexbox."
+    >
+
+    <link rel="stylesheet" href="task3.css">
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- Header -->
+        <header class="header">
+
+            <div class="logo">
+                AT Dashboard
+            </div>
+
+            <!-- Flexbox navigation -->
+            <nav class="navbar" aria-label="Main navigation">
+                <a href="#">Dashboard</a>
+                <a href="#">Analytics</a>
+                <a href="#">Reports</a>
+                <a href="#">Settings</a>
+            </nav>
+
+            <button
+                class="profile-button"
+                type="button"
+            >
+                AT
+            </button>
+
+        </header>
+
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <h2>Menu</h2>
+
+            <nav aria-label="Sidebar navigation">
+                <a href="#">Overview</a>
+                <a href="#">Customers</a>
+                <a href="#">Orders</a>
+                <a href="#">Products</a>
+                <a href="#">Reports</a>
+            </nav>
+
+        </aside>
+
+
+        <!-- Main content -->
+        <main class="main">
+
+            <section class="hero">
+
+                <div>
+                    <p class="eyebrow">ANALYTICS</p>
+
+                    <h1>Dashboard Overview</h1>
+
+                    <p>
+                        Monitor your business performance,
+                        customers and sales from one place.
+                    </p>
+                </div>
+
+                <button
+                    class="primary-button"
+                    id="openModal"
+                    type="button"
+                >
+                    Create Report
+                </button>
+
+            </section>
+
+
+            <!-- Responsive card grid -->
+            <section
+                class="card-grid"
+                aria-label="Dashboard statistics"
+            >
+
+                <!-- Flexbox card -->
+                <article class="card">
+
+                    <div class="card-content">
+                        <p>Total Revenue</p>
+                        <h2>$48,250</h2>
+                    </div>
+
+                    <span class="card-icon">↗</span>
+
+                </article>
+
+
+                <article class="card">
+
+                    <div class="card-content">
+                        <p>Total Orders</p>
+                        <h2>1,284</h2>
+                    </div>
+
+                    <span class="card-icon">🛒</span>
+
+                </article>
+
+
+                <article class="card">
+
+                    <div class="card-content">
+                        <p>Customers</p>
+                        <h2>8,492</h2>
+                    </div>
+
+                    <span class="card-icon">👥</span>
+
+                </article>
+
+
+                <article class="card">
+
+                    <div class="card-content">
+                        <p>Conversion Rate</p>
+                        <h2>6.8%</h2>
+                    </div>
+
+                    <span class="card-icon">%</span>
+
+                </article>
+
+            </section>
+
+
+            <!-- Content section -->
+            <section class="content-grid">
+
+                <article class="panel">
+
+                    <div class="panel-header">
+                        <h2>Recent Activity</h2>
+                        <a href="#">View all</a>
+                    </div>
+
+                    <ul class="activity-list">
+
+                        <li>
+                            <strong>New order</strong>
+                            <span>Order #1048 completed</span>
+                        </li>
+
+                        <li>
+                            <strong>New customer</strong>
+                            <span>John joined your platform</span>
+                        </li>
+
+                        <li>
+                            <strong>Payment received</strong>
+                            <span>$2,450 payment received</span>
+                        </li>
+
+                        <li>
+                            <strong>Report generated</strong>
+                            <span>Monthly report completed</span>
+                        </li>
+
+                    </ul>
+
+                </article>
+
+
+                <article class="panel">
+
+                    <div class="panel-header">
+                        <h2>Quick Form</h2>
+                    </div>
+
+                    <!-- Flexbox form row -->
+                    <form>
+
+                        <div class="form-row">
+
+                            <label for="name">
+                                Name
+                            </label>
+
+                            <input
+                                id="name"
+                                type="text"
+                                placeholder="Enter name"
+                            >
+
+                        </div>
+
+
+                        <div class="form-row">
+
+                            <label for="email">
+                                Email
+                            </label>
+
+                            <input
+                                id="email"
+                                type="email"
+                                placeholder="Enter email"
+                            >
+
+                        </div>
+
+
+                        <button
+                            class="primary-button"
+                            type="submit"
+                        >
+                            Save
+                        </button>
+
+                    </form>
+
+                </article>
+
+            </section>
+
+
+            <!-- Centre demonstrations -->
+            <section class="centering-demo">
+
+                <h2>Four Ways to Centre an Element</h2>
+
+                <div class="center-method method-1">
+                    <span>Flexbox</span>
+                </div>
+
+                <div class="center-method method-2">
+                    <span>Grid</span>
+                </div>
+
+                <div class="center-method method-3">
+                    <span>Absolute + Transform</span>
+                </div>
+
+                <div class="center-method method-4">
+                    <span>Margin Auto</span>
+                </div>
+
+            </section>
+
+
+            <!-- CSS diagnostic section -->
+            <section class="diagnostics">
+
+                <h2>CSS Diagnostic Exercises</h2>
+
+                <!-- Z-index bug -->
+                <div class="z-index-demo">
+
+                    <div class="z-parent">
+
+                        <div class="z-child">
+                            z-index: 9999
+                        </div>
+
+                    </div>
+
+                    <div class="z-sibling">
+                        z-index: 1
+                    </div>
+
+                </div>
+
+
+                <!-- Specificity -->
+                <div class="specificity-demo">
+
+                    <p id="special-text" class="override-text">
+                        Specificity Test
+                    </p>
+
+                </div>
+
+
+                <!-- Margin collapse -->
+                <div class="margin-demo">
+
+                    <div class="margin-box first-box">
+                        First element
+                    </div>
+
+                    <div class="margin-box second-box">
+                        Second element
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- Footer -->
+        <footer class="footer">
+
+            <p>
+                © 2026 AT Dashboard
+            </p>
+
+        </footer>
+
+    </div>
+
+
+    <!-- Fixed modal overlay -->
+    <div
+        class="modal-overlay"
+        id="modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
+        >
+
+            <button
+                class="close-button"
+                id="closeModal"
+                type="button"
+                aria-label="Close modal"
+            >
+                ×
+            </button>
+
+            <h2 id="modal-title">
+                Create Report
+            </h2>
+
+            <p>
+                Your report will be generated from the
+                latest dashboard data.
+            </p>
+
+            <button
+                class="primary-button"
+                type="button"
+            >
+                Generate
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        const openModal =
+            document.getElementById("openModal");
+
+        const closeModal =
+            document.getElementById("closeModal");
+
+        const modal =
+            document.getElementById("modal");
+
+
+        openModal.addEventListener("click", function () {
+
+            modal.classList.add("show");
+
+            modal.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+        });
+
+
+        closeModal.addEventListener("click", function () {
+
+            modal.classList.remove("show");
+
+            modal.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+        });
+
+
+        modal.addEventListener("click", function (event) {
+
+            if (event.target === modal) {
+
+                modal.classList.remove("show");
+
+                modal.setAttribute(
+                    "aria-hidden",
+                    "true"
+                );
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
