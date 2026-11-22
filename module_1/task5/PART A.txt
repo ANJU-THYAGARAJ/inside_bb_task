@@ -1,0 +1,57 @@
+
+1. console.log(typeof null, typeof undefined, typeof NaN, typeof []);
+    Prediction: bject undefined number object
+    Explanation:
+No mismatch. null is a historical JavaScript quirk with type "object", NaN is a special numeric value, and arrays are objects.
+
+2. console.log(0 == '0', 0 === '0', null == undefined, null === undefined, NaN == NaN);
+
+Prediction:true false true false false 
+Explanation:
+No mismatch. == performs type coercion, === does not, and NaN is never equal to itself.   
+
+3. console.log([] == false, [] ? 'truthy' : 'falsy');
+
+    Prediction:true truthy
+    Explanation:No mismatch. An empty array is truthy, but when compared with false using ==, it is converted through primitive conversion to 0, making the comparison 0 == 0.
+
+4. for (var i=0;i<3;i++) setTimeout(()=>console.log('var',i),0);
+for (let j=0;j<3;j++) setTimeout(()=>console.log('let',j),0);
+
+    Prediction:var 3
+    var 3
+    var 3
+    let 0
+    let 1
+    let 2
+    Explanation:
+No mismatch. var has function scope, so all callbacks share the same i, while let creates a new binding for each loop iteration.
+5. console.log('A'); setTimeout(()=>console.log('B'),0);
+Promise.resolve().then(()=>console.log('C')); console.log('D');
+    Prediction:A
+D
+C
+B
+Explanation:
+No mismatch. Synchronous code runs first, Promise callbacks use the microtask queue, and setTimeout uses the macrotask/task queue, so C runs before B.
+6. const arr=[1,2,3]; arr.push(4); console.log(arr); // why is this allowed with const?
+    Prediction:[1, 2, 3, 4]
+    Explanation:
+No mismatch. const prevents reassignment of the variable itself; it does not make the array immutable.
+7. const a={x:{y:1}}; const b={...a}; b.x.y=99; console.log(a.x.y);
+    Prediction:99
+    Explanation:
+No mismatch. The spread operator creates a shallow copy, so a.x and b.x refer to the same nested object.
+
+8. console.log([10,9,1].sort(), [10,9,1].sort((p,q)=>p-q));
+    Prediction:[1, 10, 9]
+[1, 9, 10]
+Explanation:
+No mismatch. Default sort() converts elements to strings and sorts lexicographically, while p - q performs numeric comparison.
+9. const o={n:'x', reg(){return this.n}, arrow:()=>this?.n};
+console.log(o.reg(), o.arrow());
+    Prediction:x undefined
+    Explanation:No mismatch in a normal browser script. reg() gets this from the object call (o.reg()), but the arrow function does not create its own this; it captures the surrounding this.
+10. console.log([1,2,3].map(n=>n*2), [1,2,3].forEach(n=>n*2));
+    Prediction:[2, 4, 6] undefined
+    Explanation:No mismatch. map() creates and returns a new array, whereas forEach() executes the callback for each element but returns undefined.

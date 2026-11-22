@@ -1,0 +1,23 @@
+1. What is a closure and when have you used one?
+
+A closure is created when a function remembers and can access variables from its outer scope even after the outer function has finished executing. In JavaScript, closures are useful for keeping data private and maintaining state between function calls. For example, a function can create a variable and return another function that modifies or reads that variable. The returned function still has access to the variable because of the closure.
+
+I have used closures when implementing utilities such as once(), debounce(), and throttle(). For example, in once(), a closure stores a hasRun variable. The first time the returned function is called, it executes the original function and changes hasRun to true. Later calls can access the same variable and therefore prevent the function from executing again. Closures are also useful in event handlers, callbacks, private state, and asynchronous JavaScript programming.
+
+2. Explain the event loop.
+
+The event loop is the mechanism JavaScript uses to handle asynchronous operations while JavaScript itself runs on a single main thread. Synchronous code is executed first on the call stack. When JavaScript encounters an asynchronous operation, such as setTimeout, the operation is handled outside the call stack and its callback is scheduled for later.
+
+JavaScript has different queues for callbacks. Promise callbacks are placed in the microtask queue, while callbacks such as setTimeout are placed in the task or macrotask queue. After the current synchronous code finishes, the event loop processes microtasks before moving to the next task.
+
+For example, if the code prints A, schedules a timer for B, schedules a Promise for C, and prints D, the output is A D C B. This happens because synchronous code runs first, then Promise microtasks, and finally the timer callback. The event loop allows JavaScript to perform asynchronous work without blocking the main thread.
+
+3. How does this work?
+
+In JavaScript, this refers to a value determined mainly by how a function is called, rather than where the function is defined. When a regular function is called as an object method, this refers to the object before the dot. For example, in user.getName(), this refers to user.
+
+If a regular function is called by itself, the value of this depends on the execution mode. In strict mode, it is undefined. JavaScript classes also use this to refer to the current object instance.
+
+Arrow functions are different: they do not have their own this. Instead, they inherit this from their surrounding lexical scope. This is why arrow functions are often useful inside callbacks when we want to preserve the surrounding this.
+
+For example, obj.method() gives the method this = obj, but assigning const fn = obj.method; fn() loses that object context. Understanding this is important when working with objects, classes, callbacks, event handlers, and asynchronous JavaScript.
