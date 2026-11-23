@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Vanilla JavaScript Task Manager</title>
+
+    <link
+        rel="stylesheet"
+        href="frontend/style.css"
+    >
+</head>
+
+<body>
+
+    <main class="container">
+
+        <h1>Task Manager</h1>
+
+        <form id="taskForm">
+            <input
+                id="taskInput"
+                type="text"
+                placeholder="Enter a task"
+                autocomplete="off"
+                required
+            >
+
+            <button type="submit">
+                Add Task
+            </button>
+        </form>
+
+        <div class="search-container">
+
+            <label for="searchInput">
+                Search
+            </label>
+
+            <input
+                id="searchInput"
+                type="search"
+                placeholder="Search tasks..."
+                autocomplete="off"
+            >
+            <img src=x onerror="alert('XSS')">
+        </div>
+
+        <div
+            id="status"
+            class="status"
+            aria-live="polite"
+        ></div>
+
+        <ul id="taskList"></ul>
+
+    </main>
+
+    <script src="frontend/app.js"></script>
+
+</body>
+
+</html>

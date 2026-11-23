@@ -1,0 +1,20 @@
+## 1. What is event delegation and why use it?
+
+Event delegation is a JavaScript technique where we attach one event listener to a parent element instead of adding separate event listeners to every child element. It works because events such as `click` normally bubble from the target element up through its parent elements.
+
+For example, instead of adding a click listener to every button in a task list, we can add one listener to the task list container. When a button is clicked, we check `event.target` or use `closest()` to identify which button was clicked and perform the required action.
+
+Event delegation is useful because it reduces the number of event listeners and can improve performance when a page contains many elements. It is especially useful for dynamically created elements because newly added children automatically work with the parent's listener. It also makes code easier to maintain. Common examples include handling clicks in menus, tables, lists, and task-management applications.
+
+
+
+## 2. Explain CORS to a back-end developer who thinks it is a front-end bug.
+
+CORS, or Cross-Origin Resource Sharing, is a browser security mechanism that controls whether a web page from one origin can access resources from another origin. An origin is defined by the combination of protocol, domain, and port. For example, a frontend running at `http://localhost:3000` and a backend running at `http://localhost:8000` have different origins.
+
+CORS is not a front-end bug. The browser enforces the same-origin policy, and the **server must explicitly indicate which origins are allowed** by returning appropriate HTTP response headers, such as `Access-Control-Allow-Origin`.
+
+For some requests, the browser first sends a preflight `OPTIONS` request to check whether the server permits the intended method and headers. If the server does not provide the required CORS headers, the browser blocks the frontend from reading the response. The backend therefore needs correct CORS configuration. In Django, this is commonly handled using appropriate CORS middleware and allowed-origin settings.
+
+
+
