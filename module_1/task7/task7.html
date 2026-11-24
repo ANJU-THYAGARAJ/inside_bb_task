@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <meta
+        name="description"
+        content="TaskFlow is an accessible task dashboard for searching, filtering and adding tasks."
+    >
+
+    <meta
+        name="theme-color"
+        content="#0f172a"
+    >
+
+    <title>TaskFlow </title>
+
+    <link rel="stylesheet" href="task7.css">
+</head>
+
+<body>
+
+    <!-- Keyboard accessibility -->
+    <a class="skip-link" href="#main-content">
+        Skip to main content
+    </a>
+
+    <header class="site-header">
+
+        <div class="container header-inner">
+
+            <a
+                class="brand"
+                href="#dashboard"
+                aria-label="TaskFlow home"
+            >
+                TaskFlow
+            </a>
+
+            <nav aria-label="Primary navigation">
+
+                <ul class="nav-list">
+
+                    <li>
+                        <a href="#dashboard">
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#tasks">
+                            Tasks
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#add">
+                            Add task
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#demo">
+                            State demo
+                        </a>
+                    </li>
+
+                </ul>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+    <main
+        id="main-content"
+        class="container"
+        tabindex="-1"
+    >
+        <div id="app" aria-live="polite"></div>
+    </main>
+
+    <footer class="site-footer">
+
+        <div class="container">
+            <p>
+                &copy; 2024 TaskFlow. All rights reserved.
+            </p>
+           
+
+        </div>
+
+    </footer>
+
+    <noscript>
+        <div class="noscript">
+            JavaScript is required to use TaskFlow.
+        </div>
+    </noscript>
+
+    <script src="task7.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+1. What does it do?
+
+TaskFlow is an accessible task-management application that lets a user view tasks from an API, search and filter them, mark them complete, remove them, and create new tasks, while keeping their changes saved in the browser.
+
+The goal was not just to make something that looks good, but to build a frontend that behaves correctly under real interview conditions such as slow networks, keyboard navigation, API failures, different screen sizes, and DevTools inspection.
+
+2. Walk me through the structure. Why these components?
+
+The application is built with three files: `index.html`, `styles.css`, and `app.js`.
+
+The HTML provides the semantic document structure. I use a header containing the primary navigation, a main element for the application content, and a footer. I also added a skip-to-content link for keyboard and screen-reader users.
+
+The JavaScript controls the application state and routing. I have a dashboard view, a tasks view, an add-task view, and a state-demo view.
+
+The tasks view is separated from the dashboard because it has a different responsibility. The dashboard provides a quick overview, while the tasks view handles the actual task interaction.
+
+The add-task view contains the form and API POST operation. I also created a state-demo view specifically so an interviewer can immediately see the loading, empty, error, and success states without having to manipulate the network repeatedly.
+
+The application uses DOM APIs such as `createElement`, `textContent`, `append`, and `replaceChildren`. I deliberately use `textContent` for task data instead of inserting user-controlled strings as HTML.
+
+3. Why those breakpoints?
+
+I didn't choose breakpoints because a particular device has a particular width. I chose them around layout changes.
+
+Below 768 pixels, the interface becomes a single-column layout because the navigation, search controls, and dashboard cards need more vertical space.
+
+At 768 pixels, I allow the dashboard to use two columns.
+
+At larger desktop sizes, the content gets a maximum width so it doesn't become unnecessarily stretched across a very large screen.
+
+I also added a specific landscape-phone rule because landscape mobile devices can have very little vertical space. In that situation, I remove the sticky header behavior so it doesn't consume too much of the viewport.
+
+I tested the application at 320, 768, 1024 and 1440 pixels, as well as landscape phone dimensions.
+
+4. What happens on a slow connection?
+
+If the API is slow, the application immediately changes its state to `loading`.
+
+Instead of showing a blank screen, I display a loading message and skeleton rows.
+
+The important part is that the interface doesn't wait silently for the API.
+
+Once the request finishes successfully, the application moves to the success state.
+
+If the request fails, it moves to the error state and displays a visible error message with a Retry button.
+
+I tested this using Chrome DevTools Network throttling with Slow 3G.
+5. Tab through it and explain the screen-reader experience.
+
+The first keyboard interaction can reach the skip link. This lets a keyboard or screen-reader user skip repetitive navigation.
+
+The navigation links have meaningful names such as Dashboard, Tasks and Add task.
+
+On the Tasks page, the search field has an associated label, and the filter is a native select element, so it has built-in keyboard behavior.
+
+Each task has a checkbox with an accessible label describing which task it controls. The Remove button also has an accessible name that includes the task title.
+
+Status information uses live regions. For example, loading information uses `role="status"` and errors use `role="alert"`.
+
+I also added a visible focus indicator using `:focus-visible`, so a keyboard user can always see where focus currently is.
+
+6. Where is your API key?
+
+There isn't one.
+
+The project uses JSONPlaceholder, which is a public demonstration API that doesn't require an API key.
+
+If this application used a private API requiring credentials, I would not put the secret in JavaScript or expose it through the browser. I would put a backend proxy between the frontend and the protected API and keep the secret in a server-side environment variable.
+
+7. What is the largest asset on the page?
+
+This version deliberately doesn't use image assets.
+
+That was a design decision because the assignment is focused on the application behavior rather than decorative imagery.
+
+Because there are no raster images, there is nothing to compress or lazy-load.
+
+If I added production images, I would use correctly sized AVIF or WebP assets, specify width and height to avoid layout shifts, and use lazy loading for images below the fold.
+
+8. What was the hardest layout or state problem?
+
+The hardest part was not the visual layout itself. It was handling the different API states while keeping the interface predictable.
+
+The Tasks page can be loading, successful, empty, or failed.
+
+I solved this with explicit application state:
+
+`loading`, `success`, and `error`, combined with the filtered task collection to determine the empty state.
+
+This prevents the common mistake of showing a blank page when the API returns an empty list or when a request fails.
+
+I also created the State Demo page so those states can be demonstrated reliably during an interview.
+
+9. What would you change with another week?
+
+With another week, I would replace JSONPlaceholder with a real backend and database so task creation, deletion and completion were truly persistent across devices.
+
+I would add authentication so each user had their own tasks.
+
+I would also add automated tests for the API states, form validation, filtering and keyboard interactions.
+
+For production deployment, I would add a build pipeline, asset optimization, monitoring, error tracking and automated Lighthouse/accessibility checks in CI.
+
+Finally, I would run a formal screen-reader test with NVDA on Windows and VoiceOver on macOS/iOS instead of relying only on semantic markup and automated audits.
+
+Overall, the main goal of TaskFlow was to demonstrate that a frontend should not only look correct. It should also remain usable and understandable when the network is slow, the API fails, the viewport changes, JavaScript state changes, or an interviewer opens DevTools and starts testing it.
